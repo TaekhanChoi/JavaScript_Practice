@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="scissors">Scissors</button>
+        <button id="paper">Paper</button>
+    </div>
+
+    <p>You vs Computer</p>
+
+    <div class="score">
+
+    </div>
+
+    <div class="log">
+        
+    </div>
+
+    <script>        
+        let userScore = 0;
+        let computerScore = 0;
+
+        if(userScore < 5 && computerScore < 5) {
+            function getAnInteger(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+    
+            function computerSelection() {
+                let selection = ['rock', 'paper', 'scissors']
+                let selectionNum = 0;
+                selectionNum = getAnInteger(0, 2);
+                return selection[selectionNum];
+            }
+        
+            function playRound(player, computer) {
+                let message = "Error!"
+
+                if(player === computer){
+                    message = "It's a tie!"
+                }
+
+                else {
+                    if (computer == "rock"){
+                        if(player == "paper") {
+                            message = "You win! Paper wins rock";
+                        }
+                        else {
+                            message = "You lost! Rock wins scissors";
+                        }
+                    }
+                    else if (computer == "scissors")
+                    {
+                        if(player == "rock"){
+                            message = "You win! Rock wins scissors";
+                        }
+                        else {
+                            message = "You lost! Scissors wins paper";
+                        }
+                    }
+                    else {
+                        if(player == "rock"){
+                            message = "You lost! Paper wins rock";
+                        }
+                        else {
+                            message = "You win! Scissors wins paper";
+                        }
+                    }
+                }
+
+            if(message.includes("You win!")){
+                userScore++;
+            }
+            else if(message.includes("You lost!")){
+                computerScore++;
+            }
+            else {
+                computerScore++;
+                userScore++;
+            }
+
+            const target = document.querySelector('.log');
+            const logMessage = document.createElement('p');
+            logMessage.textContent = message;
+            target.appendChild(logMessage);
+
+            const scoreTarget = document.querySelector('.score');
+            const score = document.createElement('p');
+
+    
+            //if(computerScore == 0 || userScore == 0) {
+                score.textContent = userScore + " vs " + computerScore;
+                scoreTarget.appendChild(score);
+            //}
+            //else {
+                //score.textContent = userScore + " vs " + computerScore;
+                //scoreTarget.removeChild(score);
+            //}
+            //score.textContent = userScore + " vs " + computerScore;
+            //scoreTarget.removeChild(score);
+            //scoreTarget.appendChild(score);
+            }
+
+            function game(){
+            playRound(user, computerSelection());
+            }
+
+            const Rock = document.querySelector("#rock");
+            const Scissors = document.querySelector("#scissors");
+            const Paper = document.querySelector("#paper");
+        
+            let user="";
+        
+            Rock.addEventListener("click", function() {
+            user = "rock";
+            game(user);
+            });
+                
+            Scissors.addEventListener("click", function() {
+            user = "scissors";
+            game(user);
+            });
+                
+            Paper.addEventListener("click", function() {
+            user = "paper";
+            game(user);
+            });
+        }
+        else {
+            const messageTarget = document.querySelector('.score');
+            const winnerMessage = document.createElement('p');
+            if(computerScore > userScore){
+                winnerMessage.textContent = "Computer wins!"
+            }
+            else if(computerScore < userScore){
+                winnerMessage.textContent = "You win!"
+            }
+            else {
+                winnerMessage.textContent = "You both win!"
+            }
+            messageTarget.appendChild(winnerMessage);
+        }    
+    </script>
+</body>
+</html>

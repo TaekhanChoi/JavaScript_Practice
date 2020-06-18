@@ -1,0 +1,42 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "drawingBoard reset"
+}
+
+.board {
+    grid-area: drawingBoard;
+    height: 100vh;
+    width: 100vh;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    background-color: white;
+    border: 5px solid black;
+}
+
+.resetArea {
+    grid-area: reset;
+    text-align: center;
+    margin: auto;
+}
+
+.header {
+    text-align: center;
+}
+
+.reset {
+    font-size: 20px;
+    padding: 10px 10px 10px 10px;
+    border-radius: 2px;
+    background-color: white;
+    color: black;
+    border: 2px solid blue;
+    decoration: none;
+}
+
+.reset:hover {
+    transition: 1s;
+    background-color: black;
+    color: white;
+    transform: scale(1.2);
+}
